@@ -1,0 +1,29 @@
+ .jumbotronEven {
+  background:#292b2c;
+  color: #e9ecef;
+  margin-bottom: 0;
+  
+}
+
+.jumbotronOdd {
+  background:#e9ecef;  
+  color:#292b2c;
+  margin-bottom: 0;
+  
+}
+
+#pieChartListingType {
+  width: 100%;
+  height: 750px;
+  font-size: 14px; }
+
+#barGraphNeighborhoodPrice {
+  width: 100%;
+  height: 750px;
+  font-size: 14px; }
+
+#barGraphNeighborhoodReview {
+  width: 100%;
+  height: 750px;
+  font-size: 0px; 
+}

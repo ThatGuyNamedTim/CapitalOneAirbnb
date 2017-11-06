@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Airbnb</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/default.css') }}">
+
+
+    <script src="{{ url_for('static', filename='amcharts/amcharts.js') }}"></script>
+    <script src="{{ url_for('static', filename='amcharts/serial.js') }}"></script>
+    <script src="{{ url_for('static', filename='amcharts/pie.js') }}"></script>
+    <script src="{{ url_for('static', filename='amcharts/themes/light.js') }}"></script>
+    <script src="{{ url_for('static', filename='barGraphNeighborhoodReview.js') }}"></script>
+    <script src="{{ url_for('static', filename='barGraphNeighborhoodPrice.js') }}"></script>
+    <script src="{{ url_for('static', filename='pieChartListingType.js') }}"></script>
+    <script src="{{ url_for('static', filename='organizeBarChartsFromAmChartsCodePen.js') }}"></script>
+
+    <meta name="author" content="Tim">
+    <meta charset="UTF-8">
+    <meta name="author" content="Tim">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    {% include 'includes/_navBar.html' %}
+
+    <script>
+        makePieChartListingType({{ pieChartListingType|safe }});
+        makeBarGraphNeighborhoodPriceChart({{ barGraphNeighborhoodPrice|safe }});
+        makeBarGraphNeighborhoodReviewChart({{ barGraphNeighborhoodReview|safe }});
+    </script>
+
+    <div class="jumbotron jumbotron-fluid jumbotronEven">
+        <div class="container">
+            <h1 class="display-3">Become an Airbnb Host Now!</h1>
+
+            <p class="lead">There are all kinds of perks to being listing out extra rooms in your house on Airbnb</p>
+            <ul>
+                <li>Make a side income</li>
+                <li>It can be fun</li>
+
+                <li>Low risk</li>
+                <ul>
+                    <li>$1,000,000 Host Gaurantee</li>
+                    <li>Host Protection insurance</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid jumbotronOdd">
+        <div class="container">
+            <h2>SEE HOW MUCH YOU CAN MAKE</h2>
+            <br>
+            <br>
+            <table style="width: 100%">
+                <td>
+                    <form method="POST" action="/" enctype="multipart/form-data" id="inputForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="latitudeIn" placeholder="Latitude" style="width: 500px">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="longitudeIn" placeholder="Longitude" style="width: 500px">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="numHostWeek" placeholder="Number of times planning to list rooms a week" style="width: 500px">
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </form>
+
+                    {% if givenLocationCost is defined %}
+                </td>
+                <td style="padding-left: 10%">
+                    <div id='output'>
+                        <table class="table" style="font-size: 18px;">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Potential Income</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Average Weekly Income:</th>
+                                    <td>{{ givenLocationCost }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Optimal Price:</th>
+                                    <td>{{ optimalLocationCost }}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                {% endif %}
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="jumbotron jumbotron-fluid jumbotronEven">
+        <div class="container">
+            <h2>HERE IS SOME DATA</h2>
+        </div>
+    </div>
+
+
+    <div class="jumbotron jumbotron-fluid jumbotronOdd">
+        <div class="container">
+            <div id="pieChartListingType"></div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid jumbotronEven" style="padding-right: 0px;padding-left: 0px;">
+        <div id="barGraphNeighborhoodPrice"></div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid jumbotronOdd barGraphDiv">
+        <div id="barGraphNeighborhoodReview"></div>
+    </div>
+
+
+
+</body>
+
+</html>
