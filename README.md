@@ -12,7 +12,7 @@ It was created with all of the following:
 * amCharts
   * This was used for graphing the data
   
-# Base Objectives 
+## Base Objectives 
 
 * There are three graphs near the bottom of my webpage
   * A bar graph of price vs Neighborhood
@@ -23,3 +23,8 @@ It was created with all of the following:
   * The price per day is used by taking an average of other listings in a radius around the given location
 * Given a location I am able to calculate the potential earnings
   * it is calculated by using the price of the listing in a radius around the location with the most listings
+
+## Optional Objectives
+
+* There are animations in the charts from amCharts
+* The chart with rating vs neighborhood shows the most popular neighborhoods
