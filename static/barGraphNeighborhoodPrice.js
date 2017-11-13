@@ -2,7 +2,7 @@ function makeBarGraphNeighborhoodPriceChart (data) {
     var barGraphZipPriceChart = AmCharts.makeChart("barGraphNeighborhoodPrice", {
         "type": "serial",
         "theme": "light",
-        "color": "#e9ecef",
+        "color": "#292b2c",
         "dataProvider": data,
         "gridAboveGraphs": true,
         "startDuration": 1,
@@ -12,7 +12,7 @@ function makeBarGraphNeighborhoodPriceChart (data) {
                 "text": "Prices in Different Neighborhoods",
                 "size" : 25
         }],
-        
+
         "graphs": [{
             "balloonText": "[[category]]: $<b>[[value]]</b> Per Square Foot",
             "fillAlphas": 0.8,
@@ -43,6 +43,6 @@ function makeBarGraphNeighborhoodPriceChart (data) {
                 "title": "Average Price Per Square Foot (USD)"
             }
         ],
-        
+
     } );
 }

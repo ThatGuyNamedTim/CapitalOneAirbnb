@@ -2,7 +2,7 @@ function makePieChartListingType (data) {
     var pieChartListingTypeChart = AmCharts.makeChart("pieChartListingType", {
         "type": "pie",
         "theme": "light",
-        "color":"#292b2c",
+        "color":"#e9ecef",
         "dataProvider": data,
         "valueField": "Count",
         "titleField": "Type",
@@ -11,7 +11,6 @@ function makePieChartListingType (data) {
                 "text": "Listing Types",
                 "size" : 25
             }
-        ],    
+        ],
     });
 }
-   

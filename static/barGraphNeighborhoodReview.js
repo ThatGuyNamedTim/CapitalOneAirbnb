@@ -2,11 +2,11 @@ function makeBarGraphNeighborhoodReviewChart (data) {
     var barGraphZipReviewChart = AmCharts.makeChart("barGraphNeighborhoodReview", {
         "type": "serial",
         "theme": "light",
-        "color":"#292b2c",
+        "color":"#e9ecef",
         "dataProvider": data,
         "gridAboveGraphs": true,
         "startDuration": 1,
-        "orderByField" : "Average Review",        
+        "orderByField" : "Average Review",
         "titles": [
             {
                 "text": "Reviews in Different Neighborhoods",
@@ -46,4 +46,3 @@ function makeBarGraphNeighborhoodReviewChart (data) {
     } );
 
 }
-
