@@ -7,6 +7,7 @@ function makePieChartListingType (data) {
         "valueField": "Count",
         "labelTickColor":"#e9ecef",
         "legend" : {
+          "color" : "#e9ecef",
           "position" : "right",
           "mariginRight": 150,
           "autoMarigins" : false
