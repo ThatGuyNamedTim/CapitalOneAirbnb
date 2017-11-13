@@ -14,7 +14,7 @@ It was created with all of the following:
   
 # Base Objectives 
 
-*T here are three graphs near the bottom of my webpage
+* There are three graphs near the bottom of my webpage
   * A bar graph of price vs Neighborhood
   * A bar graph of ratings vs Neighborhood
   * A pie graph of the types of listings
