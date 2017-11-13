@@ -58,13 +58,13 @@
                 <td>
                     <form method="POST" action="/" enctype="multipart/form-data" id="inputForm">
                         <div class="form-group">
-                            <input type="number" class="form-control" min = name="latitudeIn" min = "37.6" max = "37.8" placeholder="Latitude">
+                            <input type="number" class="form-control" min = name="latitudeIn" min = "37.6" max = "37.8" step = "any" placeholder="Latitude">
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="longitudeIn" min="-122.5" max="-122.3" placeholder="Longitude">
+                            <input type="number" class="form-control" name="longitudeIn" min="-122.5" max="-122.3" step = "any" placeholder="Longitude">
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="numHostWeek" placeholder="Listings Per Week">
+                            <input type="number" class="form-control" name="numHostWeek" min = "1" max = "7" placeholder="Listings Per Week">
                         </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
