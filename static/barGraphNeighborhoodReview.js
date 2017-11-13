@@ -3,6 +3,7 @@ function makeBarGraphNeighborhoodReviewChart (data) {
         "type": "serial",
         "theme": "light",
         "color":"#e9ecef",
+        "LabelColorField":"#e9ecef",
         "dataProvider": data,
         "gridAboveGraphs": true,
         "startDuration": 1,
