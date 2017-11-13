@@ -1,6 +1,6 @@
 import csv
 import json
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 from geopy.distance import vincenty
 import threading
 
@@ -17,11 +17,11 @@ def makeWebApp():
     global finishData
     global pieChartData
     global barGraphNeighborhoodPriceData
-    global barGraphNeighborhoodReviewData   
+    global barGraphNeighborhoodReviewData
 
     #simple class for a given location
     class Listing:
-        
+
         def __init__(self, zipCode, id, price, reviewScore, squareFoot, neighborhood, latitude, longitude, listingCount):
             #all the data that I use
             self.latitude = latitude
@@ -33,10 +33,10 @@ def makeWebApp():
             self.reviewScore = 0 #start with 0
             self.squareFoot = 0
             self.listingCount = 0
-            
+
             #now set the data to the actual values if they were properly filled in the form
             if (price != ''):
-                self.price = float(price.replace('$','').replace(',',''))  
+                self.price = float(price.replace('$','').replace(',',''))
             if (reviewScore != ''):
                 self.reviewScore = float(reviewScore)
             if (squareFoot != '' and squareFoot != 0): #some squarefootage was most likely incorrect so it is filtered out
@@ -85,14 +85,14 @@ def makeWebApp():
                         except:
                             propertyTypes.append(propertyType)
                             propertyTypesCounter.append(1)
-                    
-                    #read in data    
+
+                    #read in data
                     zipCode = row[43].split('-')[0] #some are formated ####-####
                     listingID = row[0]
                     price = row[60]
                     squareFoot = row[59]
                     reviewScore = row[79]
-                    squareFoot = row[59]                            
+                    squareFoot = row[59]
                     neighborhood = row[38]
                     latitude = row[48]
                     longitude = row[49]
@@ -100,36 +100,36 @@ def makeWebApp():
 
                     #use data for the neighborhoods vs Price/SQFT
                     #some may have entered the squarefoot incorrectly so there are checked in if statement
-                    if (neighborhood != '' and price != '' and price != 0 and squareFoot != '' and float(squareFoot) > 5): 
-                        if (any(n == neighborhood for n in neighborhoodsForPricing) != 1 and float(price.split('$')[1])/float(squareFoot) < 3): 
+                    if (neighborhood != '' and price != '' and price != 0 and squareFoot != '' and float(squareFoot) > 5):
+                        if (any(n == neighborhood for n in neighborhoodsForPricing) != 1 and float(price.split('$')[1])/float(squareFoot) < 3):
                             neighborhoodsForPricing.append(neighborhood)
-        
-        
+
+
                     #use data for the neighborhoods vs Review
                     if (neighborhood != '' and len(neighborhood) < 30 and reviewScore != ''):
                         if (any(n == neighborhood for n in neighborhoodsForReview) != 1): #some people might have incorrect entries
-                            neighborhoodsForReview.append(neighborhood) 
+                            neighborhoodsForReview.append(neighborhood)
 
                     if (any(n.id == listingID for n in listings) != 1):
                         listings.append(Listing(zipCode, listingID, price, reviewScore, squareFoot, neighborhood, latitude, longitude, listingCount))
-                    
+
     #Loops and storage for the cost per sqarefoot for a neighborhood calculations
     neighborhoodsPricing = [0] * len(neighborhoodsForPricing)
     neighborhoodsCounterPricing = [0] * len(neighborhoodsForPricing)
 
     for listing in listings:
-        
+
         #some are probably entered wrong because more than 2 per foot is absurd, outliers or incorrect information
-        if (listing.price != '' and listing.price != 0 and listing.squareFoot != '' and listing.squareFoot > 30 and listing.zipCode.startswith('9') 
-            and listing.neighborhood != ''   and listing.price/listing.squareFoot < 3): 
-            try: 
+        if (listing.price != '' and listing.price != 0 and listing.squareFoot != '' and listing.squareFoot > 30 and listing.zipCode.startswith('9')
+            and listing.neighborhood != ''   and listing.price/listing.squareFoot < 3):
+            try:
                 #long calculation due to long names, it is just calculatin average
                 neighborhoodsPricing[neighborhoodsForPricing.index(listing.neighborhood)] = round(((neighborhoodsPricing[neighborhoodsForPricing.index(listing.neighborhood)] *
-                                                            neighborhoodsCounterPricing[neighborhoodsForPricing.index(listing.neighborhood)] 
+                                                            neighborhoodsCounterPricing[neighborhoodsForPricing.index(listing.neighborhood)]
                                                             + listing.price / listing.squareFoot)
                                                             /(neighborhoodsCounterPricing[neighborhoodsForPricing.index(listing.neighborhood)] + 1)),2)
                 neighborhoodsCounterPricing[neighborhoodsForPricing.index(listing.neighborhood)] = neighborhoodsCounterPricing[neighborhoodsForPricing.index(listing.neighborhood)] + 1
-            except: 
+            except:
                 pass
 
     #Loops and storage for the average Reviews for a neighborhood calculations
@@ -138,15 +138,15 @@ def makeWebApp():
     neighborhoodsCounterReviews = [0] * len(neighborhoodsForReview) #different than neighborhoodsCounterPricing because not all that have prices and squarefeet have reviews
 
     for listing in listings:
-        if (listing.reviewScore != '' and listing.zipCode != '' and listing.neighborhood != '' and len(listing.neighborhood) < 30):  
-            try: 
+        if (listing.reviewScore != '' and listing.zipCode != '' and listing.neighborhood != '' and len(listing.neighborhood) < 30):
+            try:
                 #long calculation due to long names, it is just calculatin average
                 neighborhoodsReviews[neighborhoodsForReview.index(listing.neighborhood)] = round(((neighborhoodsReviews[neighborhoodsForReview.index(listing.neighborhood)] *
-                                                            neighborhoodsCounterReviews[neighborhoodsForReview.index(listing.neighborhood)] 
+                                                            neighborhoodsCounterReviews[neighborhoodsForReview.index(listing.neighborhood)]
                                                             + listing.reviewScore)
                                                             /(neighborhoodsCounterReviews[neighborhoodsForReview.index(listing.neighborhood)] + 1)),2)
                 neighborhoodsCounterReviews[neighborhoodsForReview.index(listing.neighborhood)] = neighborhoodsCounterReviews[neighborhoodsForReview.index(listing.neighborhood)] + 1
-            except: 
+            except:
                 pass
 
     # create others for the type of listings because it is very cluttered due to some random listing types
@@ -160,13 +160,13 @@ def makeWebApp():
             otherSum += count
         else:
             if (propertyTypes[index] == 'Other'):
-                otherSum += count         
+                otherSum += count
             else:
                 propertyTypesFinal.append(propertyTypes[index])
                 propertyTypesCounterFinal.append(count)
     # add the other to the dataset
     propertyTypesCounterFinal.append(otherSum)
-    propertyTypesFinal.append('Other') 
+    propertyTypesFinal.append('Other')
 
 
     #create the data in JSON format
@@ -183,7 +183,7 @@ def index():
     if request.method == 'GET':
         print(finishData)
         if finishData == 1:
-                return render_template('index.html', 
+                return render_template('index.html',
                             pieChartListingType = pieChartData,
                             barGraphNeighborhoodPrice = barGraphNeighborhoodPriceData,
                             barGraphNeighborhoodReview = barGraphNeighborhoodReviewData)
@@ -198,13 +198,13 @@ def index():
         #the revuenue for week is using a 1 mi circle around the given point and the average price and the given number of listings per week
         #
         # the optimal price is using the price of the listing with the most listings in 1 mi radius
-        # if there are multiple with same number of listings their prices are averaged 
-        
+        # if there are multiple with same number of listings their prices are averaged
+
         givenLocation = (request.form['latitudeIn'], request.form['longitudeIn'])
         numHostWeek = request.form['numHostWeek']
         givenLocationCost = 0
         countForWeekly = 0
-        
+
         count = 0
         optimalCost = 0
         currentMax = 0
@@ -229,8 +229,8 @@ def index():
         if (givenLocationCost == 0 or request.form['latitudeIn'] == ''):
             givenLocationCost = 'BAD INPUT'
         else:
-            #convert the price to the price per week 
-            givenLocationCost = '$' + str(round(givenLocationCost * int(numHostWeek))) 
+            #convert the price to the price per week
+            givenLocationCost = '$' + str(round(givenLocationCost * int(numHostWeek)))
 
         if (optimalCost == 0):
             optimalCost = 'BAD INPUT'
@@ -238,7 +238,7 @@ def index():
             optimalCost = '$' + str(round(optimalCost,2))
 
         #return the site with the form data results
-        return render_template('index.html', 
+        return render_template('index.html',
                             pieChartListingType = pieChartData,
                             barGraphNeighborhoodPrice = barGraphNeighborhoodPriceData,
                             barGraphNeighborhoodReview = barGraphNeighborhoodReviewData,

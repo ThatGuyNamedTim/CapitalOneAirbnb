@@ -2,14 +2,14 @@
   background:#292b2c;
   color: #e9ecef;
   margin-bottom: 0;
-  
+
 }
 
 .jumbotronOdd {
-  background:#e9ecef;  
+  background:#e9ecef;
   color:#292b2c;
   margin-bottom: 0;
-  
+
 }
 
 #pieChartListingType {
@@ -25,5 +25,21 @@
 #barGraphNeighborhoodReview {
   width: 100%;
   height: 750px;
-  font-size: 0px; 
+  font-size: 0px;
+}
+
+#input {
+  width: 100%;
+}
+
+#input .form-group {
+  width: 500px;
+}
+
+#output {
+  padding-left: 10%;
+}
+
+#output #table {
+  font-size: 18px;
 }

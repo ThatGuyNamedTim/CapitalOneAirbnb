@@ -54,26 +54,26 @@
             <h2>SEE HOW MUCH YOU CAN MAKE</h2>
             <br>
             <br>
-            <table style="width: 100%">
+            <table id="input">
                 <td>
                     <form method="POST" action="/" enctype="multipart/form-data" id="inputForm">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="latitudeIn" placeholder="Latitude" style="width: 500px">
+                            <input type="text" class="form-control" name="latitudeIn" placeholder="Latitude">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="longitudeIn" placeholder="Longitude" style="width: 500px">
+                            <input type="text" class="form-control" name="longitudeIn" placeholder="Longitude">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="numHostWeek" placeholder="Number of times planning to list rooms a week" style="width: 500px">
+                            <input type="text" class="form-control" name="numHostWeek" placeholder="Number of times planning to list rooms a week">
                         </div>
                         <button type="submit" class="btn btn-secondary">Submit</button>
                     </form>
 
                     {% if givenLocationCost is defined %}
                 </td>
-                <td style="padding-left: 10%">
+                <td id = "output">
                     <div id='output'>
-                        <table class="table" style="font-size: 18px;">
+                        <table class="table">
                             <thead class="thead-inverse">
                                 <tr>
                                     <th>Potential Income</th>
@@ -113,11 +113,11 @@
         </div>
     </div>
 
-    <div class="jumbotron jumbotron-fluid jumbotronEven" style="padding-right: 0px;padding-left: 0px;">
+    <div class="jumbotron jumbotron-fluid jumbotronEven">
         <div id="barGraphNeighborhoodPrice"></div>
     </div>
 
-    <div class="jumbotron jumbotron-fluid jumbotronOdd barGraphDiv">
+    <div class="jumbotron jumbotron-fluid jumbotronOdd">
         <div id="barGraphNeighborhoodReview"></div>
     </div>
 
