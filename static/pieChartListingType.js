@@ -10,7 +10,7 @@ function makePieChartListingType (data) {
           "position" : "right",
           "mariginRight": 150,
           "autoMarigins" : false
-        }
+        },
         "titleField": "Type",
         "titles": [
             {
