@@ -38,8 +38,8 @@ function makeBarGraphNeighborhoodReviewChart (data) {
         },
         "valueAxes": [
             {
-                "axisColor": "#292b2c",
-                "gridColor": "#292b2c",
+                "axisColor": "#e9ecef",
+                "gridColor": "#e9ecef",
                 "title": "Average Review (out of 100)"
             }
         ],

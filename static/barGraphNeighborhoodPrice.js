@@ -38,8 +38,8 @@ function makeBarGraphNeighborhoodPriceChart (data) {
         },
         "valueAxes": [
             {
-                "axisColor": "#e9ecef",
-                "gridColor": "#e9ecef",
+                "axisColor": "#292b2c",
+                "gridColor": "#292b2c",
                 "title": "Average Price Per Square Foot (USD)"
             }
         ],
