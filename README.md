@@ -1,5 +1,5 @@
-# CapitalOneAirbnb
-This is a website that was created for the Capital One Software Engineering Summit (Jan 2018)
+# CapitalOneAirbnb : https://capitalbnb.herokuapp.com/
+This is a website that was created for the Capital One Software Engineering Summit (Jan 2018). It will take a while to load the first time because the server is most likely not running due to inactivity which triggers the free Heroku hosting to shut it down. This slowdown is not due to the app, it is due to the free hosting service. 
 
 It was created with all of the following:
 
@@ -28,3 +28,5 @@ It was created with all of the following:
 
 * There are animations in the charts from amCharts
 * The chart with rating vs neighborhood shows the most popular neighborhoods
+
+
